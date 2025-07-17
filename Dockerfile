@@ -10,6 +10,9 @@ COPY package*.json ./
 # Instaliramo dependencies
 RUN npm ci --only=production
 
+# Instaliramo curl za healthcheck
+RUN apk add --no-cache curl
+
 # Kopiramo ostatak aplikacije
 COPY . .
 
