@@ -13,6 +13,24 @@ document.addEventListener('DOMContentLoaded', function() {
         orderButton.textContent = `Naruči majicu (${totalPrice}€)`;
     });
 
+    // Ažuriranje slike na osnovu veličine
+    const sizeSelect = document.getElementById('velicina');
+    const productImage = document.getElementById('productImage');
+    
+    sizeSelect.addEventListener('change', function() {
+        const size = this.value;
+        if (size) {
+            // Možete imati različite slike za različite veličine
+            // productImage.src = `images/sinj-majica-${size.toLowerCase()}.jpg`;
+            
+            // Ili dodajte animaciju kad se promeni veličina
+            productImage.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                productImage.style.transform = 'scale(1)';
+            }, 200);
+        }
+    });
+
     // Zatvaranje notifikacije
     notificationClose.addEventListener('click', function() {
         hideNotification();

@@ -1,0 +1,12 @@
+// Dodajte ove slike u public/images/ folder:
+// sinj-majica.jpg (glavna slika)
+// sinj-majica-s.jpg (za veličinu S)
+// sinj-majica-m.jpg (za veličinu M)
+// sinj-majica-l.jpg (za veličinu L)
+// sinj-majica-xl.jpg (za veličinu XL)
+// sinj-majica-xxl.jpg (za veličinu XXL)
+
+// Ili možete koristiti jedan od ovih besplatnih servisa:
+// 1. Unsplash: https://unsplash.com/s/photos/t-shirt
+// 2. Pexels: https://www.pexels.com/search/t-shirt/
+// 3. Pixabay: https://pixabay.com/images/search/t-shirt/

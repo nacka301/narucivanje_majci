@@ -1,0 +1,11 @@
+<!-- SVG placeholder za majicu -->
+<svg width="400" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="400" height="400" fill="#2c2c2c"/>
+  <rect x="50" y="80" width="300" height="240" rx="20" fill="#1a1a1a"/>
+  <text x="200" y="140" text-anchor="middle" fill="#e74c3c" font-family="Arial, sans-serif" font-size="24" font-weight="bold">SINJ</text>
+  <text x="200" y="180" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="16">x Thompson</text>
+  <circle cx="150" cy="220" r="15" fill="#FFD700"/>
+  <circle cx="250" cy="220" r="15" fill="#FFD700"/>
+  <rect x="140" y="240" width="120" height="60" rx="10" fill="#8B4513"/>
+  <text x="200" y="275" text-anchor="middle" fill="#ffffff" font-family="Arial, sans-serif" font-size="12">Premium</text>
+</svg>

@@ -23,6 +23,7 @@ header {
     margin-bottom: 40px;
     padding: 20px 0;
     border-bottom: 2px solid #e74c3c;
+    position: relative;
 }
 
 .logo {
@@ -35,6 +36,35 @@ header {
 .subtitle {
     color: #666;
     font-size: 1.1em;
+    margin-bottom: 15px;
+}
+
+.admin-link {
+    margin-top: 15px;
+}
+
+.admin-btn {
+    display: inline-block;
+    background: #343a40;
+    color: white;
+    padding: 8px 16px;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 0.9em;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    border: 2px solid #343a40;
+}
+
+.admin-btn:hover {
+    background: #495057;
+    border-color: #495057;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.admin-btn:active {
+    transform: translateY(0);
 }
 
 /* Main Content */
@@ -64,6 +94,13 @@ header {
     height: auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    transition: transform 0.3s ease;
+    object-fit: cover;
+    aspect-ratio: 1/1;
+}
+
+.product-image img:hover {
+    transform: scale(1.05);
 }
 
 .product-badge {
@@ -275,37 +312,40 @@ footer p {
 }
 
 /* Responsive Design */
-@media (max-width: 768px) {
-    .main-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-    }
-    
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-    
-    .logo {
-        font-size: 2em;
-    }
-    
-    .container {
-        padding: 10px;
-    }
-    
-    .product-section,
-    .order-section {
-        padding: 20px;
-    }
-    
-    .notification {
-        right: 10px;
-        left: 10px;
-        max-width: none;
-    }
-}
-
-@media (max-width: 480px) {
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .logo {
+                font-size: 2em;
+            }
+            
+            .container {
+                padding: 10px;
+            }
+            
+            .product-section,
+            .order-section {
+                padding: 20px;
+            }
+            
+            .notification {
+                right: 10px;
+                left: 10px;
+                max-width: none;
+            }
+            
+            .admin-btn {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+        }@media (max-width: 480px) {
     .logo {
         font-size: 1.8em;
     }

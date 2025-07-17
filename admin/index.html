@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - Sinj x Thompson</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8f9fa;
+            color: #333;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: #e74c3c;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .nav-links {
+            margin-top: 15px;
+        }
+
+        .back-btn {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            color: white;
+            padding: 8px 16px;
+            text-decoration: none;
+            border-radius: 6px;
+            font-size: 0.9em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+
+        .back-btn:hover {
+            background: rgba(255,255,255,0.3);
+            border-color: rgba(255,255,255,0.5);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+        }
+
+        .back-btn:active {
+            transform: translateY(0);
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2em;
+            font-weight: bold;
+            color: #e74c3c;
+        }
+
+        .stat-label {
+            color: #666;
+            margin-top: 5px;
+        }
+
+        .orders-section {
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+
+        .section-header {
+            background: #f8f9fa;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .refresh-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .refresh-btn:hover {
+            background: #c0392b;
+        }
+
+        .orders-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .orders-table th,
+        .orders-table td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        .orders-table th {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .status-badge {
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            font-weight: 500;
+        }
+
+        .status-nova { background: #fff3cd; color: #856404; }
+        .status-u_obradi { background: #cce5ff; color: #004085; }
+        .status-poslano { background: #d4edda; color: #155724; }
+        .status-zavrseno { background: #f8d7da; color: #721c24; }
+
+        .status-select {
+            padding: 4px 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 0.9em;
+        }
+
+        .loading {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+        }
+
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }
+
+        .order-details {
+            font-size: 0.9em;
+            color: #666;
+        }
+
+        .email-status {
+            font-size: 0.8em;
+        }
+
+        .email-sent { color: #28a745; }
+        .email-failed { color: #dc3545; }
+
+        @media (max-width: 768px) {
+            .orders-table {
+                font-size: 0.8em;
+            }
+            
+            .orders-table th,
+            .orders-table td {
+                padding: 8px 4px;
+            }
+            
+            .back-btn {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+            
+            .refresh-btn {
+                font-size: 0.8em;
+                padding: 6px 12px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>📊 Admin Panel - Sinj x Thompson</h1>
+            <p>Upravljanje narudžbama majica</p>
+            <div class="nav-links">
+                <a href="/" class="back-btn">← Nazad na glavnu</a>
+            </div>
+        </header>
+
+        <div class="stats-grid" id="statsGrid">
+            <div class="stat-card">
+                <div class="stat-number" id="totalOrders">-</div>
+                <div class="stat-label">Ukupno narudžbi</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalRevenue">-</div>
+                <div class="stat-label">Ukupna zarada</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="newOrders">-</div>
+                <div class="stat-label">Nove narudžbe</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="todayOrders">-</div>
+                <div class="stat-label">Danas</div>
+            </div>
+        </div>
+
+        <div class="orders-section">
+            <div class="section-header">
+                <h2>📋 Sve narudžbe</h2>
+                <button class="refresh-btn" onclick="loadData()">🔄 Osveži</button>
+            </div>
+            
+            <div id="ordersContainer">
+                <div class="loading">Učitavanje...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Funkcija za učitavanje statistika
+        async function loadStats() {
+            try {
+                const response = await fetch('/api/admin/stats');
+                const stats = await response.json();
+                
+                document.getElementById('totalOrders').textContent = stats.ukupno_narudbi || 0;
+                document.getElementById('totalRevenue').textContent = (stats.ukupna_zarada || 0) + '€';
+                document.getElementById('newOrders').textContent = stats.nove_narudbe || 0;
+                document.getElementById('todayOrders').textContent = stats.danas || 0;
+            } catch (error) {
+                console.error('Greška pri učitavanju statistika:', error);
+            }
+        }
+
+        // Funkcija za učitavanje narudžbi
+        async function loadOrders() {
+            try {
+                const response = await fetch('/api/admin/orders');
+                const orders = await response.json();
+                
+                const container = document.getElementById('ordersContainer');
+                
+                if (orders.length === 0) {
+                    container.innerHTML = '<div class="loading">Nema narudžbi</div>';
+                    return;
+                }
+                
+                const tableHTML = `
+                    <table class="orders-table">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Kupac</th>
+                                <th>Kontakt</th>
+                                <th>Proizvod</th>
+                                <th>Cena</th>
+                                <th>Status</th>
+                                <th>Email</th>
+                                <th>Datum</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            ${orders.map(order => `
+                                <tr>
+                                    <td><strong>#${order.id}</strong></td>
+                                    <td>
+                                        <div>${order.ime} ${order.prezime}</div>
+                                        <div class="order-details">${order.adresa}</div>
+                                        <div class="order-details">${order.grad} ${order.postanski_broj}</div>
+                                    </td>
+                                    <td>
+                                        <div>${order.email}</div>
+                                        <div class="order-details">${order.telefon}</div>
+                                    </td>
+                                    <td>
+                                        <div>Majica (${order.velicina})</div>
+                                        <div class="order-details">Količina: ${order.kolicina}</div>
+                                        ${order.napomena ? `<div class="order-details">Napomena: ${order.napomena}</div>` : ''}
+                                    </td>
+                                    <td><strong>${order.ukupna_cena}€</strong></td>
+                                    <td>
+                                        <select class="status-select" onchange="updateStatus(${order.id}, this.value)">
+                                            <option value="nova" ${order.status === 'nova' ? 'selected' : ''}>Nova</option>
+                                            <option value="u_obradi" ${order.status === 'u_obradi' ? 'selected' : ''}>U obradi</option>
+                                            <option value="poslano" ${order.status === 'poslano' ? 'selected' : ''}>Poslano</option>
+                                            <option value="zavrseno" ${order.status === 'zavrseno' ? 'selected' : ''}>Završeno</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <div class="email-status ${order.email_poslat ? 'email-sent' : 'email-failed'}">
+                                            Kupac: ${order.email_poslat ? '✓' : '✗'}
+                                        </div>
+                                        <div class="email-status ${order.admin_email_poslat ? 'email-sent' : 'email-failed'}">
+                                            Admin: ${order.admin_email_poslat ? '✓' : '✗'}
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <div>${new Date(order.datum_narudbe).toLocaleDateString('sr-RS')}</div>
+                                        <div class="order-details">${new Date(order.datum_narudbe).toLocaleTimeString('sr-RS')}</div>
+                                    </td>
+                                </tr>
+                            `).join('')}
+                        </tbody>
+                    </table>
+                `;
+                
+                container.innerHTML = tableHTML;
+            } catch (error) {
+                console.error('Greška pri učitavanju narudžbi:', error);
+                document.getElementById('ordersContainer').innerHTML = 
+                    '<div class="error">Greška pri učitavanju narudžbi</div>';
+            }
+        }
+
+        // Funkcija za ažuriranje statusa
+        async function updateStatus(orderId, newStatus) {
+            try {
+                const response = await fetch(`/api/admin/orders/${orderId}/status`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ status: newStatus })
+                });
+                
+                if (response.ok) {
+                    console.log('Status ažuriran');
+                    loadStats(); // Osvežavamo statistike
+                } else {
+                    console.error('Greška pri ažuriranju statusa');
+                }
+            } catch (error) {
+                console.error('Greška pri ažuriranju statusa:', error);
+            }
+        }
+
+        // Funkcija za učitavanje svih podataka
+        function loadData() {
+            loadStats();
+            loadOrders();
+        }
+
+        // Učitavanje podataka pri otvaranju stranice
+        document.addEventListener('DOMContentLoaded', loadData);
+
+        // Automatsko osvežavanje svakih 30 sekundi
+        setInterval(loadData, 30000);
+    </script>
+</body>
+</html>
