@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="hr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sinj x Thompson | Majice</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">Sinj x Thompson</h1>
+            <p class="subtitle">Originalna Hrvatska Dizajn</p>
+        </header>
+
+        <main class="main-content">
+            <div class="product-section">
+                <div class="product-image">
+                    <img src="https://via.placeholder.com/400x400/2c2c2c/ffffff?text=SINJ+MAJICA" alt="Sinj x Thompson majica" id="productImage">
+                </div>
+                
+                <div class="product-info">
+                    <div class="product-badge">
+                        <span class="badge-icon">🏆</span>
+                        <span class="badge-text">Premium Sinj Majica</span>
+                    </div>
+                    <p class="product-description">
+                        Ekskluzivni dizajn inspirisan slavnom pobijedom Sinja
+                    </p>
+                    <div class="price">25€</div>
+                    
+                    <div class="product-features">
+                        <div class="feature">
+                            <span class="check">✓</span>
+                            <span>100% pamuk, vrhunska kvaliteta</span>
+                        </div>
+                        <div class="feature">
+                            <span class="check">✓</span>
+                            <span>Besplatna dostava po Hrvatskoj</span>
+                        </div>
+                    </div>
+                    
+                    <div class="product-details">
+                        <h3>O majici:</h3>
+                        <p>Ova jedinstvena majica prikazuje ponos i tradiciju. Sinj kroz uslojenu i penicijskim motivima, stvarajući savršen spoj istorije i moderne urbane estetike obaveznih ideala da se sve kupci vervetnost kojima povrediti.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="order-section">
+                <div class="order-form-container">
+                    <h2>🛒 Narudžba</h2>
+                    <p class="form-subtitle">Unutar podatke za narudžbu. Nema poruke za uspešnu suradnju.</p>
+                    
+                    <form id="orderForm" class="order-form">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="ime">Ime *</label>
+                                <input type="text" id="ime" name="ime" placeholder="Vaše ime" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="prezime">Prezime *</label>
+                                <input type="text" id="prezime" name="prezime" placeholder="Vaše prezime" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Email adresa *</label>
+                            <input type="email" id="email" name="email" placeholder="vas@email.com" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="telefon">Telefon *</label>
+                            <input type="tel" id="telefon" name="telefon" placeholder="385 xx xxx xxxx" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="adresa">Adresa dostave *</label>
+                            <input type="text" id="adresa" name="adresa" placeholder="Ulica i broj" required>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="grad">Grad</label>
+                                <input type="text" id="grad" name="grad" placeholder="Vaš grad" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="postanskiBroj">Poštanski broj</label>
+                                <input type="text" id="postanskiBroj" name="postanskiBroj" placeholder="12345" required>
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="velicina">Veličina *</label>
+                                <select id="velicina" name="velicina" required>
+                                    <option value="">Odaberite veličinu</option>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="kolicina">Količina</label>
+                                <select id="kolicina" name="kolicina" required>
+                                    <option value="1">1</option>
+                                    <option value="2">2</option>
+                                    <option value="3">3</option>
+                                    <option value="4">4</option>
+                                    <option value="5">5</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="napomena">Napomena (neobavezno)</label>
+                            <textarea id="napomena" name="napomena" placeholder="Dodatne napomene..."></textarea>
+                        </div>
+
+                        <div class="terms">
+                            <p>
+                                * Molimo sve obavezne kontakte
+                                <br>* Gotovina ili kreditnom karticom
+                                <br>* Međunarodnoj dostavi 14 dana
+                            </p>
+                        </div>
+
+                        <button type="submit" class="order-button">
+                            Naruči majicu (25€)
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Sinj x Thompson</p>
+            <p>Ponudio prekrasničnu Hrvatskoj tradiciju, komo kvalitetniji stjahi.</p>
+        </footer>
+    </div>
+
+    <div id="notification" class="notification hidden">
+        <div class="notification-content">
+            <span class="notification-message"></span>
+            <button class="notification-close">&times;</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
