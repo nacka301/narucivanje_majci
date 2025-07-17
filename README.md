@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Sinj x Thompson - Majice Web Shop
 
 Web aplikacija za naručivanje Sinj x Thompson majica.
@@ -106,3 +107,6 @@ Health check endpoint omogućava:
 ---
 
 **Kontakt**: davidovic.development@gmail.com
+=======
+# narucivanje_majci
+>>>>>>> 95cfa9ea012f1ff979e714405d7705076b60f9dc
