@@ -2,36 +2,10 @@ const nodemailer = require('nodemailer');
 
 // Email konfiguracija
 const emailConfig = {
-    // Gmail konfiguracija
-    gmail: {
-        service: 'gmail',
-        auth: {
-            user: process.env.EMAIL_USER,
-            pass: process.env.EMAIL_PASS
-        },
-        tls: {
-            rejectUnauthorized: false
-        }
-    },
-    
-    // SendGrid konfiguracija (za produkciju)
-    sendgrid: {
-        host: 'smtp.sendgrid.net',
-        port: 587,
-        secure: false,
-        auth: {
-            user: 'apikey',
-            pass: process.env.SENDGRID_API_KEY
-        },
-        tls: {
-            rejectUnauthorized: false
-        }
-    },
-    
     // Custom SMTP server
     smtp: {
-        host: process.env.SMTP_HOST || 'smtp.gmail.com',
-        port: process.env.SMTP_PORT || 587,
+        host: process.env.SMTP_HOST,
+        port: parseInt(process.env.SMTP_PORT, 10),
         secure: false,
         auth: {
             user: process.env.EMAIL_USER,
@@ -45,16 +19,7 @@ const emailConfig = {
 
 // Kreiranje transporter-a
 const createTransporter = () => {
-    const emailService = process.env.EMAIL_SERVICE || 'gmail';
-    
-    switch(emailService) {
-        case 'sendgrid':
-            return nodemailer.createTransport(emailConfig.sendgrid);
-        case 'smtp':
-            return nodemailer.createTransport(emailConfig.smtp);
-        default:
-            return nodemailer.createTransport(emailConfig.gmail);
-    }
+    return nodemailer.createTransport(emailConfig.smtp);
 };
 
 // Funkcija za slanje email-a korisniku
@@ -62,9 +27,10 @@ const sendOrderConfirmation = async (narudba) => {
     const transporter = createTransporter();
     
     const mailOptions = {
-        from: process.env.EMAIL_FROM || process.env.EMAIL_USER || 'sinj.thompson.majice@gmail.com',
+        from: '"Sinj x Thompson" <vpsolutions.booking@gmail.com>',
         to: narudba.email,
-        subject: 'Potvrda narudžbe - Sinj x Thompson Majica',
+        subject: '✅ Potvrda narudžbe - Sinj x Thompson Majica',
+        replyTo: 'vpsolutions.booking@gmail.com',
         html: `
         <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
             <div style="background: #e74c3c; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
@@ -101,16 +67,36 @@ const sendOrderConfirmation = async (narudba) => {
                 ` : ''}
                 
                 <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #2d5a2d; margin-top: 0;">Sledeći koraci:</h3>
-                    <p>• Kontaktiraćemo vas u roku od 24 sata</p>
-                    <p>• Dostava se vrši u roku od 3-5 radnih dana</p>
-                    <p>• Plaćanje pouzećem ili uplatom na račun</p>
+                    <h3 style="color: #2d5a2d; margin-top: 0;">🎯 Sledeći koraci:</h3>
+                    <p style="margin: 8px 0;">✅ Vaša narudžba je uspešno primljena</p>
+                    <p style="margin: 8px 0;">📞 Kontaktiraćemo vas u roku od 24 sata</p>
+                    <p style="margin: 8px 0;">🚚 Dostava se vrši u roku od 7-14 radnih dana</p>
+                    <p style="margin: 8px 0;">💰 Plaćanje pouzećem ili uplatom na račun</p>
+                    <p style="margin: 8px 0;"><strong>⚠️ Proverite spam folder ako ne vidite ovaj email!</strong></p>
+                </div>
+                
+                <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #ffeaa7;">
+                    <h3 style="color: #856404; margin-top: 0;">💡 Važne informacije:</h3>
+                    <p style="margin: 8px 0; color: #856404;">• Besplatna dostava po cijeloj Hrvatskoj</p>
+                    <p style="margin: 8px 0; color: #856404;">• Majica je 100% pamuk, vrhunska kvaliteta</p>
+                    <p style="margin: 8px 0; color: #856404;">• Mogućnost povrata u roku od 14 dana</p>
+                    <p style="margin: 8px 0; color: #856404;">• Sačuvajte ovaj email kao potvrdu narudžbe</p>
                 </div>
                 
                 <div style="text-align: center; margin-top: 30px;">
-                    <p style="color: #666;">Za sva pitanja kontaktirajte nas:</p>
-                    <p><strong>Email:</strong> sinj.thompson.majice@gmail.com</p>
-                    <p><strong>Telefon:</strong> +385 xx xxx xxxx</p>
+                    <p style="color: #666;">Za sva pitanja ili pomoć kontaktirajte:</p>
+                    <p><strong>📧 Email:</strong> vpsolutions.booking@gmail.com</p>
+                    <p><strong>👤 Kontakt osoba:</strong> Patrik Kos</p>
+                    <p><strong>📞 Telefon:</strong> +385 99 264 3964</p>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd;">
+                    <p style="color: #999; font-size: 12px; margin: 5px 0;">
+                        © 2025 Sinj x Thompson. Sva prava zadržana.
+                    </p>
+                    <p style="color: #999; font-size: 12px; margin: 5px 0;">
+                        Hvala vam što ste odabrali naše proizvode! 🇭🇷
+                    </p>
                 </div>
             </div>
         </div>
@@ -132,7 +118,7 @@ const sendAdminNotification = async (narudba) => {
     const transporter = createTransporter();
     
     const mailOptions = {
-        from: process.env.EMAIL_FROM || process.env.EMAIL_USER || 'sinj.thompson.majice@gmail.com',
+        from: 'vpsolutions.booking@gmail.com',
         to: process.env.ADMIN_EMAIL || 'admin@sinjthompson.com',
         subject: `Nova narudžba #${narudba.id} - Sinj x Thompson`,
         html: `

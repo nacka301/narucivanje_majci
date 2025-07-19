@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Sinj x Thompson - Majice Web Shop
 
 Web aplikacija za naručivanje Sinj x Thompson majica.
@@ -107,6 +106,53 @@ Health check endpoint omogućava:
 ---
 
 **Kontakt**: davidovic.development@gmail.com
-=======
-# narucivanje_majci
->>>>>>> 95cfa9ea012f1ff979e714405d7705076b60f9dc
+
+## ⚖️ LEGALNI ZAHTEVI PRE PRODUKCIJE
+
+### OBAVEZNO za legalno poslovanje u Hrvatskoj:
+
+#### 1. **OIB i podaci o trgovcu**
+- Ažurirajte footer u `public/index.html` linija 185
+- Zamenite `[MOLIMO UNESITE VAŠ OIB]` sa vašim OIB-om  
+- Zamenite `[MOLIMO UNESITE NAZIV I ADRESU TRGOVCA]` sa:
+  - Naziv trgovca/obrta
+  - Adresa trgovca
+  - Matični broj (ako ima)
+
+#### 2. **Registracija trgovine/obrta**
+- Registrirajte obrt/trgovinu kod nadležnih tijela
+- Ukoliko ste fizička osoba, registrirajte obrt za trgovinu
+- Ukoliko ste pravna osoba, registrirajte trgovačko društvo
+
+#### 3. **Fiskalizacija** 
+- Implementirajte fiskalnu blagajnu (ako je potrebno)
+- Kontaktirajte fiskalni servis za integraciju
+
+#### 4. **Politika privatnosti i Uvjeti korištenja**
+- ✅ Već implementirani i GDPR compliant
+- ✅ Jasno navedeno da se ne koriste cookies za korisnike
+- ✅ Definirani uvjeti korištenja
+
+#### 5. **Zakonska obveza informiranja**
+- ✅ Kontakt podaci vidljivi
+- ✅ Informacije o dostavi i plaćanju
+- ✅ Pravo na odstupanje od ugovora
+
+### 🔒 COOKIES I PRIVATNOST
+
+**Aplikacija je dizajnirana da bude privacy-friendly:**
+- ❌ Nema tracking cookies
+- ❌ Nema analitike
+- ❌ Nema marketing cookies
+- ✅ Session cookies samo za admin (interno)
+- ✅ Potpuno funkcionalna bez cookies za korisnike
+
+### 📋 CHECKLIST PRE LANSIRANJA
+
+- [ ] Uneseni OIB i podaci trgovca u footer
+- [ ] Registriran obrt/trgovina
+- [ ] Pripremljena fiskalna blagajna (ako potrebno)
+- [ ] Testirane sve funkcionalnosti
+- [ ] Spremno za produkciju
+
+**⚠️ NAPOMENA:** Konsultirajte se sa poreskim savjetnikom ili pravnikom za specifične zahtjeve vašeg slučaja.

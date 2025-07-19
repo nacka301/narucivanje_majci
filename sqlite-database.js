@@ -1,3 +1,76 @@
+// Kreiranje tablice za arhivirane narudžbe
+const initSQLiteArchiveTable = async () => {
+    return new Promise((resolve, reject) => {
+        db.run(`
+            CREATE TABLE IF NOT EXISTS archived_orders (
+                id INTEGER PRIMARY KEY,
+                ime TEXT,
+                prezime TEXT,
+                email TEXT,
+                telefon TEXT,
+                adresa TEXT,
+                grad TEXT,
+                postanski_broj TEXT,
+                velicina TEXT,
+                kolicina INTEGER,
+                ukupna_cena REAL,
+                napomena TEXT,
+                datum_narudbe DATETIME,
+                status TEXT,
+                email_poslat BOOLEAN,
+                admin_email_poslat BOOLEAN,
+                created_at DATETIME,
+                updated_at DATETIME
+            )
+        `, (err) => {
+            if (err) reject(err); else resolve();
+        });
+    });
+};
+
+// Arhiviranje narudžbe u SQLite
+const archiveSQLiteOrder = async (order) => {
+    await initSQLiteArchiveTable();
+    return new Promise((resolve, reject) => {
+        db.run(`
+            INSERT INTO archived_orders (
+                id, ime, prezime, email, telefon, adresa, grad, postanski_broj, velicina, kolicina, ukupna_cena, napomena, datum_narudbe, status, email_poslat, admin_email_poslat, created_at, updated_at
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        `, [
+            order.id,
+            order.ime,
+            order.prezime,
+            order.email,
+            order.telefon,
+            order.adresa,
+            order.grad,
+            order.postanski_broj || order.postanskiBroj,
+            order.velicina,
+            order.kolicina,
+            order.ukupna_cena || order.ukupnaCena,
+            order.napomena,
+            order.datum_narudbe || order.datum,
+            order.status,
+            order.email_poslat || order.emailPoslat,
+            order.admin_email_poslat || order.adminEmailPoslat,
+            order.created_at,
+            order.updated_at
+        ], function(err) {
+            if (err) reject({ success: false, error: err.message });
+            else resolve({ success: true });
+        });
+    });
+};
+
+// Brisanje narudžbi po statusu u SQLite
+const deleteSQLiteOrdersByStatus = async (status) => {
+    return new Promise((resolve, reject) => {
+        db.run(`DELETE FROM narudbe WHERE status = ?`, [status], function(err) {
+            if (err) reject({ success: false, error: err.message });
+            else resolve({ success: true });
+        });
+    });
+};
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
 
@@ -159,5 +232,7 @@ module.exports = {
     getSQLiteAllOrders,
     getSQLiteOrderStats,
     updateSQLiteOrderStatus,
-    updateSQLiteEmailStatus
+    updateSQLiteEmailStatus,
+    archiveSQLiteOrder,
+    deleteSQLiteOrdersByStatus
 };

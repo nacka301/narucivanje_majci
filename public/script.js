@@ -1,4 +1,8 @@
 document.addEventListener('DOMContentLoaded', function() {
+    // Sakrij modal na početak
+    const thankYouContainer = document.getElementById('thankYouContainer');
+    thankYouContainer.classList.add('hidden');
+    
     const orderForm = document.getElementById('orderForm');
     const notification = document.getElementById('notification');
     const notificationMessage = document.querySelector('.notification-message');
@@ -130,11 +134,11 @@ document.addEventListener('DOMContentLoaded', function() {
             const result = await response.json();
 
             if (response.ok && result.success) {
-                showNotification('Narudžba je uspešno poslata! Kontaktirat ćemo vas uskoro.');
+                // Prikaži hvala modal
+                showThankYouSection(result.narudba);
                 orderForm.reset();
                 orderButton.textContent = 'Naruči majicu (25€)';
                 
-                // Prikazivanje detalja narudžbe u konzoli
                 console.log('Narudžba uspešno poslata:', result.narudba);
             } else {
                 showNotification(result.message || 'Došlo je do greške. Pokušajte ponovo.', true);
@@ -147,6 +151,95 @@ document.addEventListener('DOMContentLoaded', function() {
             const quantity = parseInt(quantitySelect.value) || 1;
             const totalPrice = quantity * 25;
             orderButton.textContent = `Naruči majicu (${totalPrice}€)`;
+        }
+    });
+
+    // Funkcija za prikazivanje hvala sekcije kao modal
+    function showThankYouSection(orderData) {
+        const thankYouContainer = document.getElementById('thankYouContainer');
+        const orderDetails = document.getElementById('orderDetails');
+        const container = document.querySelector('.container');
+        
+        // Prikaži modal
+        thankYouContainer.classList.remove('hidden');
+        
+        // Popuni detalje narudžbe
+        orderDetails.innerHTML = `
+            <h3>📋 Detalji narudžbe:</h3>
+            <div class="order-detail-item">
+                <span>Narudžba broj:</span>
+                <span>#${orderData.id}</span>
+            </div>
+            <div class="order-detail-item">
+                <span>Ime:</span>
+                <span>${orderData.ime} ${orderData.prezime}</span>
+            </div>
+            <div class="order-detail-item">
+                <span>Email:</span>
+                <span>${orderData.email}</span>
+            </div>
+            <div class="order-detail-item">
+                <span>Veličina:</span>
+                <span>${orderData.velicina}</span>
+            </div>
+            <div class="order-detail-item">
+                <span>Količina:</span>
+                <span>${orderData.kolicina} kom</span>
+            </div>
+            <div class="order-detail-item">
+                <span>Ukupno:</span>
+                <span>${orderData.ukupnaCena}€</span>
+            </div>
+        `;
+        
+        // Spreci scroll na pozadini
+        document.body.style.overflow = 'hidden';
+    }
+    
+    // Funkcija za zatvaranje modal-a (globalna za onclick)
+    window.showOrderForm = function() {
+        const thankYouContainer = document.getElementById('thankYouContainer');
+        
+        // Sakrij modal
+        thankYouContainer.classList.add('hidden');
+        
+        // Vrati scroll na pozadini
+        document.body.style.overflow = 'auto';
+    };
+    
+    // Zatvaranje modal-a klikom na pozadinu ili escape
+    document.addEventListener('click', function(e) {
+        const thankYouContainer = document.getElementById('thankYouContainer');
+        const thankYouContent = document.querySelector('.thank-you-content');
+        
+        if (e.target === thankYouContainer && !thankYouContainer.classList.contains('hidden')) {
+            showOrderForm();
+        }
+    });
+    
+    document.addEventListener('keydown', function(e) {
+        const thankYouContainer = document.getElementById('thankYouContainer');
+        
+        if (e.key === 'Escape' && !thankYouContainer.classList.contains('hidden')) {
+            showOrderForm();
+        }
+    });
+
+    // Zatvaranje modal-a klikom na pozadinu
+    document.addEventListener('click', function(e) {
+        const thankYouContainer = document.getElementById('thankYouContainer');
+        if (e.target === thankYouContainer) {
+            showOrderForm();
+        }
+    });
+
+    // Zatvaranje modal-a pritiskom na Escape
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape') {
+            const thankYouContainer = document.getElementById('thankYouContainer');
+            if (!thankYouContainer.classList.contains('hidden')) {
+                showOrderForm();
+            }
         }
     });
 

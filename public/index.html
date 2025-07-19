@@ -39,7 +39,7 @@
                         </div>
                         <div class="feature">
                             <span class="check">✓</span>
-                            <span>Besplatna dostava po Hrvatskoj</span>
+                            <span>Dostava po Hrvatskoj</span>
                         </div>
                     </div>
                     
@@ -51,9 +51,10 @@
             </div>
 
             <div class="order-section">
-                <div class="order-form-container">
+                <!-- Forma za narudžbu -->
+                <div class="order-form-container" id="orderFormContainer">
                     <h2>🛒 Narudžba</h2>
-                    <p class="form-subtitle">Unutar podatke za narudžbu. Nema poruke za uspešnu suradnju.</p>
+                    <p class="form-subtitle">Unesite podatke za narudžbu. Nema poruke za uspešnu suradnju.</p>
                     
                     <form id="orderForm" class="order-form">
                         <div class="form-row">
@@ -122,25 +123,79 @@
                             <textarea id="napomena" name="napomena" placeholder="Dodatne napomene..."></textarea>
                         </div>
 
-                        <div class="terms">
-                            <p>
-                                * Molimo sve obavezne kontakte
-                                <br>* Gotovina ili kreditnom karticom
-                                <br>* Međunarodnoj dostavi 14 dana
-                            </p>
-                        </div>
-
                         <button type="submit" class="order-button">
                             Naruči majicu (25€)
                         </button>
                     </form>
                 </div>
+
+                <!-- Hvala sekcija (skrivena na početku) -->
+                <div class="thank-you-container hidden" id="thankYouContainer">
+                    <div class="thank-you-content">
+                        <button class="modal-close" onclick="showOrderForm()">&times;</button>
+                        <div class="success-icon">🎉</div>
+                        <h2>Hvala vam na narudžbi!</h2>
+                        <p class="thank-you-message">Vaša narudžba je uspešno poslata i potvrda je poslana na vaš email.</p>
+                        
+                        <div class="order-details" id="orderDetails">
+                            <!-- Ovde će se prikazati detalji narudžbe -->
+                        </div>
+                        
+                        <div class="next-steps">
+                            <h3>🎯 Sledeći koraci:</h3>
+                            <div class="step">
+                                <span class="step-number">1</span>
+                                <div class="step-content">
+                                    <strong>📧 Proverite email</strong>
+                                    <p>Potvrda narudžbe je poslata na vašu email adresu (proverite i spam folder)</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">2</span>
+                                <div class="step-content">
+                                    <strong>📞 Kontakt u roku od 24h</strong>
+                                    <p>Kontaktiraćemo vas za dodatne detalje i potvrdu narudžbe</p>
+                                </div>
+                            </div>
+                            <div class="step">
+                                <span class="step-number">3</span>
+                                <div class="step-content">
+                                    <strong>🚚 Dostava 3-5 dana</strong>
+                                    <p>Dostava širom Hrvatske, plaćanje pouzećem</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="contact-info">
+                            <h3>📞 Kontakt informacije:</h3>
+                            <p><strong>📧 Email:</strong> vpsolutions.booking@gmail.com</p>
+                            <p><strong>👤 Kontakt:</strong> Patrik Kos</p>
+                            <p><strong>📱 Telefon:</strong> +385 99 264 3964</p>
+                        </div>
+                        
+                        <button class="new-order-btn" onclick="showOrderForm()">
+                            🛒 Naruči još majica
+                        </button>
+                    </div>
+                </div>
             </div>
         </main>
 
         <footer>
-            <p>Sinj x Thompson</p>
-            <p>Ponudio prekrasničnu Hrvatskoj tradiciju, komo kvalitetniji stjahi.</p>
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Sinj x Thompson</h4>
+                    <p>Premijumske hrvatske majice</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Kontakt</h4>
+                    <p>Email: vpsolutions.booking@gmail.com</p>
+                    <p>Telefon: +385 99 264 3964</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Sinj x Thompson. Sva prava pridržana.</p>
+            </div>
         </footer>
     </div>
 

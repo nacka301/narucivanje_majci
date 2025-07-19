@@ -226,19 +226,6 @@ header {
     min-height: 100px;
 }
 
-.terms {
-    background: #f8f9fa;
-    padding: 20px;
-    border-radius: 8px;
-    border-left: 4px solid #e74c3c;
-    margin: 20px 0;
-}
-
-.terms p {
-    font-size: 0.9em;
-    color: #666;
-}
-
 .order-button {
     background: #e74c3c;
     color: white;
@@ -258,6 +245,217 @@ header {
 .order-button:disabled {
     background: #ccc;
     cursor: not-allowed;
+}
+
+/* Thank You Section - Modal Overlay */
+.thank-you-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+}
+
+.thank-you-container.hidden {
+    display: none !important;
+}
+
+.thank-you-content {
+    background: white;
+    padding: 40px 30px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.15);
+    max-width: 600px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    text-align: center;
+    animation: modalSlideIn 0.3s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.success-icon {
+    font-size: 4em;
+    margin-bottom: 20px;
+    display: block;
+}
+
+.thank-you-content h2 {
+    color: #28a745;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+    font-weight: 500;
+}
+
+.thank-you-message {
+    font-size: 1em;
+    color: #666;
+    margin-bottom: 25px;
+    line-height: 1.5;
+}
+
+.order-details {
+    background: #f8f9fa;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid #dee2e6;
+}
+
+.order-details h3 {
+    color: #e74c3c;
+    margin-bottom: 15px;
+    font-size: 1.2em;
+}
+
+.order-detail-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 0;
+    border-bottom: 1px solid #dee2e6;
+    font-size: 0.95em;
+}
+
+.order-detail-item:last-child {
+    border-bottom: none;
+    font-weight: bold;
+    color: #e74c3c;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 2px solid #e74c3c;
+}
+
+.next-steps {
+    text-align: left;
+    margin: 25px 0;
+}
+
+.next-steps h3 {
+    color: #e74c3c;
+    text-align: center;
+    margin-bottom: 20px;
+    font-size: 1.2em;
+}
+
+.step {
+    display: flex;
+    align-items: flex-start;
+    margin: 15px 0;
+    padding: 15px;
+    background: #f8f9fa;
+    border-radius: 8px;
+    border: 1px solid #dee2e6;
+}
+
+.step-number {
+    background: #e74c3c;
+    color: white;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    margin-right: 15px;
+    flex-shrink: 0;
+    font-size: 0.9em;
+}
+
+.step-content {
+    flex: 1;
+}
+
+.step-content strong {
+    color: #2c3e50;
+    display: block;
+    margin-bottom: 5px;
+    font-size: 0.95em;
+}
+
+.step-content p {
+    color: #6c757d;
+    margin: 0;
+    font-size: 0.9em;
+    line-height: 1.4;
+}
+
+.contact-info {
+    background: #e8f4fd;
+    padding: 20px;
+    border-radius: 8px;
+    margin: 20px 0;
+    border: 1px solid #bee5eb;
+}
+
+.contact-info h3 {
+    color: #0c5460;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.contact-info p {
+    margin: 8px 0;
+    color: #0c5460;
+    font-size: 0.95em;
+}
+
+.new-order-btn {
+    background: #28a745;
+    color: white;
+    border: none;
+    padding: 12px 30px;
+    border-radius: 8px;
+    font-size: 1em;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+    margin-top: 20px;
+}
+
+.new-order-btn:hover {
+    background: #218838;
+}
+
+/* Close button */
+.modal-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 1.5em;
+    cursor: pointer;
+    color: #999;
+    transition: color 0.2s ease;
+    z-index: 1001;
+    padding: 5px;
+    min-width: 44px;
+    min-height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-close:hover {
+    color: #666;
 }
 
 /* Footer */
@@ -311,6 +509,56 @@ footer p {
     margin-left: 15px;
 }
 
+/* Footer */
+footer {
+    background: #2c3e50;
+    color: white;
+    margin-top: 60px;
+    padding: 40px 0 20px 0;
+}
+
+.footer-content {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+.footer-section h4 {
+    color: #e74c3c;
+    margin-bottom: 15px;
+    font-size: 1.1em;
+}
+
+.footer-section p {
+    margin-bottom: 8px;
+    color: #ecf0f1;
+}
+
+.footer-section a {
+    color: #3498db;
+    text-decoration: none;
+}
+
+.footer-section a:hover {
+    text-decoration: underline;
+}
+
+.footer-bottom {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #34495e;
+    color: #bdc3c7;
+    font-size: 0.9em;
+}
+
+.footer-bottom p {
+    margin-bottom: 5px;
+}
+
 /* Responsive Design */
         @media (max-width: 768px) {
             .main-content {
@@ -345,17 +593,153 @@ footer p {
                 font-size: 0.8em;
                 padding: 6px 12px;
             }
-        }@media (max-width: 480px) {
-    .logo {
-        font-size: 1.8em;
-    }
-    
-    .price {
-        font-size: 2em;
-    }
-    
-    .order-button {
-        padding: 15px 30px;
-        font-size: 1.1em;
-    }
-}
+            
+            /* Modal responsive na tablet */
+            .thank-you-container {
+                padding: 15px;
+            }
+            
+            .thank-you-content {
+                padding: 30px 25px;
+                max-width: 95%;
+            }
+            
+            .success-icon {
+                font-size: 3.5em;
+            }
+            
+            .thank-you-content h2 {
+                font-size: 1.6em;
+            }
+            
+            .step {
+                padding: 12px;
+            }
+            
+            .step-number {
+                width: 25px;
+                height: 25px;
+                margin-right: 12px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo {
+                font-size: 1.8em;
+            }
+            
+            .price {
+                font-size: 2em;
+            }
+            
+            .order-button {
+                padding: 15px 30px;
+                font-size: 1.1em;
+            }
+            
+            /* Modal responsive na telefon */
+            .thank-you-container {
+                padding: 10px;
+                align-items: flex-start;
+                padding-top: 30px;
+            }
+            
+            .thank-you-content {
+                padding: 25px 15px;
+                max-width: 95%;
+                width: 95%;
+                border-radius: 8px;
+                max-height: 90vh;
+                overflow-y: auto;
+            }
+            
+            .success-icon {
+                font-size: 2.5em;
+                margin-bottom: 15px;
+            }
+            
+            .thank-you-content h2 {
+                font-size: 1.3em;
+                margin-bottom: 15px;
+            }
+            
+            .thank-you-message {
+                font-size: 0.9em;
+                margin-bottom: 20px;
+            }
+            
+            .order-details {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .order-details h3 {
+                font-size: 1.1em;
+                margin-bottom: 12px;
+            }
+            
+            .order-detail-item {
+                font-size: 0.85em;
+                padding: 6px 0;
+            }
+            
+            .next-steps {
+                margin: 20px 0;
+            }
+            
+            .next-steps h3 {
+                font-size: 1.1em;
+                margin-bottom: 15px;
+            }
+            
+            .step {
+                padding: 10px;
+                margin: 10px 0;
+            }
+            
+            .step-number {
+                width: 22px;
+                height: 22px;
+                margin-right: 10px;
+                font-size: 0.8em;
+            }
+            
+            .step-content strong {
+                font-size: 0.85em;
+            }
+            
+            .step-content p {
+                font-size: 0.8em;
+            }
+            
+            .contact-info {
+                padding: 15px;
+                margin: 15px 0;
+            }
+            
+            .contact-info h3 {
+                font-size: 1em;
+                margin-bottom: 12px;
+            }
+            
+            .contact-info p {
+                font-size: 0.85em;
+                margin: 6px 0;
+            }
+            
+            .new-order-btn {
+                padding: 10px 20px;
+                font-size: 0.9em;
+                margin-top: 15px;
+            }
+            
+            .modal-close {
+                top: 8px;
+                right: 12px;
+                font-size: 1.2em;
+                min-width: 35px;
+                min-height: 35px;
+            }
+        }
+
+
