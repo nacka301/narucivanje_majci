@@ -145,7 +145,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         } catch (error) {
             console.error('Greška pri slanju narudžbe:', error);
-            showNotification('Došlo je do greške. Proverite internetsku vezu i pokušajte ponovo.', true);
+            showNotification('Došlo je do greške. Provjerite internetsku vezu i pokušajte ponovo.', true);
         } finally {
             orderButton.disabled = false;
             const quantity = parseInt(quantitySelect.value) || 1;

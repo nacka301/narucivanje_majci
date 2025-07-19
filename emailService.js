@@ -36,19 +36,19 @@ const sendOrderConfirmation = async (narudba) => {
                 </div>
                 ${narudba.napomena ? `<div style=\"background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;\"><h3 style=\"color: #333; margin-top: 0;\">Napomena:</h3><p>${narudba.napomena}</p></div>` : ''}
                 <div style="background: #e8f5e8; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #2d5a2d; margin-top: 0;">🎯 Sledeći koraci:</h3>
-                    <p style="margin: 8px 0;">✅ Vaša narudžba je uspešno primljena</p>
-                    <p style="margin: 8px 0;">📞 Kontaktiraćemo vas u roku od 24 sata</p>
-                    <p style="margin: 8px 0;">🚚 Dostava se vrši u roku od 7-14 radnih dana</p>
+                    <h3 style="color: #2d5a2d; margin-top: 0;">🎯 Sljedeći koraci:</h3>
+                    <p style="margin: 8px 0;">✅ Vaša narudžba je uspješno primljena</p>
+                    <p style="margin: 8px 0;">📞 Kontaktirat ćemo vas u roku od 24 sata</p>
+                    <p style="margin: 8px 0;">🚚 Dostava u roku od 7-14 radnih dana</p>
                     <p style="margin: 8px 0;">💰 Plaćanje pouzećem ili uplatom na račun</p>
-                    <p style="margin: 8px 0;"><strong>⚠️ Proverite spam folder ako ne vidite ovaj email!</strong></p>
+                    <p style="margin: 8px 0;"><strong>⚠️ Provjerite spam folder ako ne vidite ovaj email!</strong></p>
                 </div>
                 <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0; border: 1px solid #ffeaa7;">
                     <h3 style="color: #856404; margin-top: 0;">💡 Važne informacije:</h3>
                     <p style="margin: 8px 0; color: #856404;">• Besplatna dostava po cijeloj Hrvatskoj</p>
                     <p style="margin: 8px 0; color: #856404;">• Majica je 100% pamuk, vrhunska kvaliteta</p>
                     <p style="margin: 8px 0; color: #856404;">• Mogućnost povrata u roku od 14 dana</p>
-                    <p style="margin: 8px 0; color: #856404;">• Sačuvajte ovaj email kao potvrdu narudžbe</p>
+                    <p style="margin: 8px 0; color: #856404;">• Spremite ovaj email kao potvrdu narudžbe</p>
                 </div>
                 <div style="text-align: center; margin-top: 30px;">
                     <p style="color: #666;">Za sva pitanja ili pomoć kontaktirajte:</p>

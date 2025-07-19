@@ -351,7 +351,7 @@ app.post('/api/naruci', async (req, res) => {
         
         res.json({ 
             success: true, 
-            message: 'Narudžba je uspešno poslata! Proverite email za potvrdu.',
+            message: 'Narudžba je uspješno poslana! Provjerite email za potvrdu.',
             narudba: narudba,
             emailStatus: {
                 userEmail: userEmailResult.success,
@@ -367,7 +367,7 @@ app.post('/api/naruci', async (req, res) => {
         // Čak i ako email ne prođe, narudžba je uspešna
         res.json({ 
             success: true, 
-            message: 'Narudžba je uspešno poslata! Kontaktiraćemo vas uskoro.',
+            message: 'Narudžba je uspješno poslana! Kontaktirat ćemo vas uskoro.',
             narudba: narudba,
             emailStatus: {
                 userEmail: false,
