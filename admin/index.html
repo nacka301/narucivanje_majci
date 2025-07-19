@@ -223,8 +223,12 @@
                 <div class="stat-label">Ukupno narudžbi</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number" id="totalRevenue">-</div>
-                <div class="stat-label">Ukupna zarada</div>
+                <div class="stat-number" id="finishedOrders">-</div>
+                <div class="stat-label">Završene narudžbe</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="processedOrders">-</div>
+                <div class="stat-label">Obrađene narudžbe</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number" id="newOrders">-</div>
@@ -233,6 +237,14 @@
             <div class="stat-card">
                 <div class="stat-number" id="todayOrders">-</div>
                 <div class="stat-label">Danas</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="totalRevenue">-</div>
+                <div class="stat-label">Ukupna zarada</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-number" id="finishedRevenue">-</div>
+                <div class="stat-label">Zarada završene</div>
             </div>
         </div>
 
@@ -262,10 +274,13 @@
                 const response = await fetch('/api/admin/stats');
                 const stats = await response.json();
                 
-                document.getElementById('totalOrders').textContent = stats.ukupno_narudbi || 0;
-                document.getElementById('totalRevenue').textContent = (stats.ukupna_zarada || 0) + '€';
-                document.getElementById('newOrders').textContent = stats.nove_narudbe || 0;
+                document.getElementById('totalOrders').textContent = stats.ukupno_narudžbi || 0;
+                document.getElementById('finishedOrders').textContent = stats.zavrsene_narudzbe || 0;
+                document.getElementById('processedOrders').textContent = stats.obradjene_narudzbe || 0;
+                document.getElementById('newOrders').textContent = stats.nove_narudzbe || 0;
                 document.getElementById('todayOrders').textContent = stats.danas || 0;
+                document.getElementById('totalRevenue').textContent = (stats.ukupna_zarada || 0) + '€';
+                document.getElementById('finishedRevenue').textContent = (stats.zarada_zavrsene || 0) + '€';
             } catch (error) {
                 console.error('Greška pri učitavanju statistika:', error);
             }

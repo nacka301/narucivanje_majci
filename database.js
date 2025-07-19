@@ -208,20 +208,29 @@ const getOrderStats = async () => {
     }
     
     try {
-        // Ukupan broj narudžbi
-        const totalResult = await pool.query('SELECT COUNT(*) as total FROM narudbe');
-        // Ukupna zarada
-        const sumResult = await pool.query('SELECT COALESCE(SUM(ukupna_cena),0) as total_sum FROM narudbe');
-        // Broj novih narudžbi (status = "nova")
-        const newResult = await pool.query("SELECT COUNT(*) as new_count FROM narudbe WHERE status = 'nova'");
-        // Broj narudžbi danas
-        const todayResult = await pool.query("SELECT COUNT(*) as today_count FROM narudbe WHERE DATE(datum) = CURRENT_DATE");
+        // Sve narudžbe
+        const totalAll = await pool.query("SELECT COUNT(*) as total FROM narudbe");
+        // Završene narudžbe
+        const totalFinished = await pool.query("SELECT COUNT(*) as total FROM narudbe WHERE status = 'zavrseno'");
+        // Obrađene narudžbe
+        const totalProcessed = await pool.query("SELECT COUNT(*) as total FROM narudbe WHERE status = 'obradjeno'");
+        // Nove narudžbe
+        const totalNew = await pool.query("SELECT COUNT(*) as total FROM narudbe WHERE status = 'nova'");
+        // Današnje narudžbe (sve)
+        const totalToday = await pool.query("SELECT COUNT(*) as total FROM narudbe WHERE DATE(datum) = CURRENT_DATE");
+        // Ukupna zarada (sve)
+        const sumAll = await pool.query("SELECT COALESCE(SUM(ukupna_cena),0) as total_sum FROM narudbe");
+        // Ukupna zarada (završene)
+        const sumFinished = await pool.query("SELECT COALESCE(SUM(ukupna_cena),0) as total_sum FROM narudbe WHERE status = 'zavrseno'");
 
         const stats = {
-            ukupno_narudžbi: parseInt(totalResult.rows[0].total),
-            ukupna_zarada: parseFloat(sumResult.rows[0].total_sum),
-            nove_narudžbe: parseInt(newResult.rows[0].new_count),
-            danas: parseInt(todayResult.rows[0].today_count)
+            ukupno_narudžbi: parseInt(totalAll.rows[0].total),
+            zavrsene_narudzbe: parseInt(totalFinished.rows[0].total),
+            obradjene_narudzbe: parseInt(totalProcessed.rows[0].total),
+            nove_narudzbe: parseInt(totalNew.rows[0].total),
+            danas: parseInt(totalToday.rows[0].total),
+            ukupna_zarada: parseFloat(sumAll.rows[0].total_sum),
+            zarada_zavrsene: parseFloat(sumFinished.rows[0].total_sum)
         };
         return { success: true, stats };
     } catch (error) {
