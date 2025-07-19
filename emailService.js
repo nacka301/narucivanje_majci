@@ -1,6 +1,6 @@
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(process.env.SENDGRID_API_KEY);
-sgMail.setDataResidency('eu');
+// sgMail.setDataResidency('eu'); // Nije podržano u ovoj verziji na serveru
 
 // Funkcija za slanje email-a korisniku preko SendGrid Web API-ja
 const sendOrderConfirmation = async (narudba) => {
