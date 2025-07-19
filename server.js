@@ -220,7 +220,9 @@ app.get('/admin/login', (req, res) => {
 // Admin login provjera (javno)
 app.post('/admin/login', (req, res) => {
     const { username, password } = req.body;
-    if (username === 'admin' && password === process.env.ADMIN_PASSWORD) {
+    const adminUser = process.env.ADMIN_USERNAME || 'admin';
+    const adminPass = process.env.ADMIN_PASSWORD;
+    if (username === adminUser && password === adminPass) {
         req.session.adminLoggedIn = true;
         return res.redirect('/admin');
     }
