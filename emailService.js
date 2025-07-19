@@ -19,12 +19,20 @@ const emailConfig = {
 
 // Kreiranje transporter-a
 const createTransporter = () => {
+    console.log('Kreiram transporter sa SMTP postavkama:', {
+        host: emailConfig.smtp.host,
+        port: emailConfig.smtp.port,
+        user: emailConfig.smtp.auth.user,
+        secure: emailConfig.smtp.secure,
+        tls: emailConfig.smtp.tls
+    });
     return nodemailer.createTransport(emailConfig.smtp);
 };
 
 // Funkcija za slanje email-a korisniku
 const sendOrderConfirmation = async (narudba) => {
     const transporter = createTransporter();
+    console.log('Pokušavam poslati email korisniku na:', narudba.email);
     
     const mailOptions = {
         from: '"Sinj x Thompson" <vpsolutions.booking@gmail.com>',
@@ -105,17 +113,27 @@ const sendOrderConfirmation = async (narudba) => {
     
     try {
         const info = await transporter.sendMail(mailOptions);
-        console.log('Email poslat korisniku:', info.messageId);
-        return { success: true, messageId: info.messageId };
+        console.log('Email poslat korisniku:', info.messageId, info.response);
+        return { success: true, messageId: info.messageId, response: info.response };
     } catch (error) {
         console.error('Greška pri slanju email-a korisniku:', error);
-        return { success: false, error: error.message };
+        if (error && error.response) {
+            console.error('Odgovor SMTP servera:', error.response);
+        }
+        if (error && error.code) {
+            console.error('SMTP error code:', error.code);
+        }
+        if (error && error.command) {
+            console.error('SMTP command:', error.command);
+        }
+        return { success: false, error: error.message, code: error.code, command: error.command, full: error };
     }
 };
 
 // Funkcija za slanje notifikacije adminu
 const sendAdminNotification = async (narudba) => {
     const transporter = createTransporter();
+    console.log('Pokušavam poslati email adminu na:', mailOptions.to);
     
     const mailOptions = {
         from: 'vpsolutions.booking@gmail.com',
@@ -172,11 +190,20 @@ const sendAdminNotification = async (narudba) => {
     
     try {
         const info = await transporter.sendMail(mailOptions);
-        console.log('Email poslat adminu:', info.messageId);
-        return { success: true, messageId: info.messageId };
+        console.log('Email poslat adminu:', info.messageId, info.response);
+        return { success: true, messageId: info.messageId, response: info.response };
     } catch (error) {
         console.error('Greška pri slanju email-a adminu:', error);
-        return { success: false, error: error.message };
+        if (error && error.response) {
+            console.error('Odgovor SMTP servera:', error.response);
+        }
+        if (error && error.code) {
+            console.error('SMTP error code:', error.code);
+        }
+        if (error && error.command) {
+            console.error('SMTP command:', error.command);
+        }
+        return { success: false, error: error.message, code: error.code, command: error.command, full: error };
     }
 };
 
