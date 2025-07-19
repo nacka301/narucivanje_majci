@@ -208,22 +208,21 @@ const getOrderStats = async () => {
     }
     
     try {
+        // Ukupan broj narudžbi
         const totalResult = await pool.query('SELECT COUNT(*) as total FROM narudbe');
-        const statusResult = await pool.query(`
-            SELECT status, COUNT(*) as count 
-            FROM narudbe 
-            GROUP BY status
-        `);
-        
+        // Ukupna zarada
+        const sumResult = await pool.query('SELECT COALESCE(SUM(ukupna_cena),0) as total_sum FROM narudbe');
+        // Broj novih narudžbi (status = "nova")
+        const newResult = await pool.query("SELECT COUNT(*) as new_count FROM narudbe WHERE status = 'nova'");
+        // Broj narudžbi danas
+        const todayResult = await pool.query("SELECT COUNT(*) as today_count FROM narudbe WHERE DATE(datum) = CURRENT_DATE");
+
         const stats = {
             total: parseInt(totalResult.rows[0].total),
-            byStatus: {}
+            totalSum: parseFloat(sumResult.rows[0].total_sum),
+            newCount: parseInt(newResult.rows[0].new_count),
+            todayCount: parseInt(todayResult.rows[0].today_count)
         };
-        
-        statusResult.rows.forEach(row => {
-            stats.byStatus[row.status] = parseInt(row.count);
-        });
-        
         return { success: true, stats };
     } catch (error) {
         console.error('❌ Greška pri dohvaćanju statistika:', error);
