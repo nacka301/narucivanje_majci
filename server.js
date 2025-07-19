@@ -49,7 +49,7 @@ app.post('/api/admin/orders/delete-finished', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3005;
 
 // Inicijalizacija baze podataka
 initDatabase();
