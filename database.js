@@ -84,9 +84,21 @@ const initDatabase = async () => {
                 admin_email_poslat BOOLEAN DEFAULT FALSE
             )
         `);
-        console.log('✅ PostgreSQL tabela kreirana/proverena');
+        // Dodaj kolonu 'datum' ako ne postoji (za migraciju sa SQLite na Postgres)
+        await pool.query(`
+            DO $$
+            BEGIN
+                IF NOT EXISTS (
+                    SELECT 1 FROM information_schema.columns 
+                    WHERE table_name='narudbe' AND column_name='datum'
+                ) THEN
+                    ALTER TABLE narudbe ADD COLUMN datum TIMESTAMP DEFAULT CURRENT_TIMESTAMP;
+                END IF;
+            END$$;
+        `);
+        console.log('✅ PostgreSQL tabela i kolona datum kreirane/proverene');
     } catch (error) {
-        console.error('❌ Greška pri kreiranju PostgreSQL tabele:', error);
+        console.error('❌ Greška pri kreiranju PostgreSQL tabele ili kolone datum:', error);
     }
 };
 
