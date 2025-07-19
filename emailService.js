@@ -2,16 +2,19 @@ const nodemailer = require('nodemailer');
 
 // Email konfiguracija
 const emailConfig = {
+// Prema iskustvu s Brevo SMTP (nakon v4.0.0-beta.379):
+// Za rad koristi port 587 i secure: true (SSL), iako je ranije na 587 bio potreban samo TLS.
+// Mailjet je radio s 587 + TLS, ali Brevo zahtijeva 587 + SSL.
     // Custom SMTP server
     smtp: {
         host: process.env.SMTP_HOST,
-        port: parseInt(process.env.SMTP_PORT, 10),
-        secure: true, // koristi SSL
+        port: 587,
+        secure: true, // koristi SSL na portu 587
         auth: {
             user: process.env.EMAIL_USER,
             pass: process.env.EMAIL_PASS
         }
-        // makni tls opciju
+        // tls opcija nije postavljena
     }
 };
 
@@ -21,8 +24,7 @@ const createTransporter = () => {
         host: emailConfig.smtp.host,
         port: emailConfig.smtp.port,
         user: emailConfig.smtp.auth.user,
-        secure: emailConfig.smtp.secure,
-        tls: emailConfig.smtp.tls
+        secure: emailConfig.smtp.secure
     });
     return nodemailer.createTransport(emailConfig.smtp);
 };
