@@ -218,10 +218,10 @@ const getOrderStats = async () => {
         const todayResult = await pool.query("SELECT COUNT(*) as today_count FROM narudbe WHERE DATE(datum) = CURRENT_DATE");
 
         const stats = {
-            total: parseInt(totalResult.rows[0].total),
-            totalSum: parseFloat(sumResult.rows[0].total_sum),
-            newCount: parseInt(newResult.rows[0].new_count),
-            todayCount: parseInt(todayResult.rows[0].today_count)
+            ukupno_narudžbi: parseInt(totalResult.rows[0].total),
+            ukupna_zarada: parseFloat(sumResult.rows[0].total_sum),
+            nove_narudžbe: parseInt(newResult.rows[0].new_count),
+            danas: parseInt(todayResult.rows[0].today_count)
         };
         return { success: true, stats };
     } catch (error) {
