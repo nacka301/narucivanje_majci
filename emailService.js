@@ -141,10 +141,8 @@ const sendAdminNotification = async (narudba) => {
                 <h1 style="margin: 0; font-size: 24px;">Nova narudžba!</h1>
                 <p style="margin: 10px 0 0 0;">Narudžba #${narudba.id}</p>
             </div>
-            
             <div style="background: white; padding: 30px; border: 1px solid #ddd; border-radius: 0 0 8px 8px;">
                 <h2 style="color: #333; margin-top: 0;">Detalji narudžbe</h2>
-                
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #333; margin-top: 0;">Proizvod:</h3>
                     <p><strong>Majica:</strong> Sinj x Thompson</p>
@@ -152,7 +150,6 @@ const sendAdminNotification = async (narudba) => {
                     <p><strong>Količina:</strong> ${narudba.kolicina}</p>
                     <p><strong>Cena:</strong> ${narudba.ukupnaCena}€</p>
                 </div>
-                
                 <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #333; margin-top: 0;">Kupac:</h3>
                     <p><strong>Ime:</strong> ${narudba.ime} ${narudba.prezime}</p>
@@ -161,21 +158,13 @@ const sendAdminNotification = async (narudba) => {
                     <p><strong>Adresa:</strong> ${narudba.adresa}</p>
                     <p><strong>Grad:</strong> ${narudba.grad} ${narudba.postanskiBroj}</p>
                 </div>
-                
-                ${narudba.napomena ? `
-                <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #856404; margin-top: 0;">Napomena:</h3>
-                    <p>${narudba.napomena}</p>
-                </div>
-                ` : ''}
-                
+                ${(narudba.napomena && narudba.napomena.trim() !== '') ? `<div style=\"background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0;\"><h3 style=\"color: #856404; margin-top: 0;\">Napomena:</h3><p>${narudba.napomena}</p></div>` : ''}
                 <div style="background: #d4edda; padding: 20px; border-radius: 8px; margin: 20px 0;">
                     <h3 style="color: #155724; margin-top: 0;">Akcije:</h3>
                     <p>• Kontaktirajte kupca na: ${narudba.telefon}</p>
                     <p>• Pripremite majicu veličine ${narudba.velicina}</p>
                     <p>• Organizujte dostavu na adresu</p>
                 </div>
-                
                 <div style="text-align: center; margin-top: 30px;">
                     <p style="color: #666;">Narudžba primljena: ${new Date(narudba.datum).toLocaleString('sr-RS')}</p>
                 </div>
@@ -184,55 +173,6 @@ const sendAdminNotification = async (narudba) => {
         `
     };
     console.log('Pokušavam poslati email adminu na:', mailOptions.to);
-        subject: `Nova narudžba #${narudba.id} - Sinj x Thompson`,
-        html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px;">
-            <div style="background: #e74c3c; color: white; padding: 20px; text-align: center; border-radius: 8px 8px 0 0;">
-                <h1 style="margin: 0; font-size: 24px;">Nova narudžba!</h1>
-                <p style="margin: 10px 0 0 0;">Narudžba #${narudba.id}</p>
-            </div>
-            
-            <div style="background: white; padding: 30px; border: 1px solid #ddd; border-radius: 0 0 8px 8px;">
-                <h2 style="color: #333; margin-top: 0;">Detalji narudžbe</h2>
-                
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #333; margin-top: 0;">Proizvod:</h3>
-                    <p><strong>Majica:</strong> Sinj x Thompson</p>
-                    <p><strong>Veličina:</strong> ${narudba.velicina}</p>
-                    <p><strong>Količina:</strong> ${narudba.kolicina}</p>
-                    <p><strong>Cena:</strong> ${narudba.ukupnaCena}€</p>
-                </div>
-                
-                <div style="background: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #333; margin-top: 0;">Kupac:</h3>
-                    <p><strong>Ime:</strong> ${narudba.ime} ${narudba.prezime}</p>
-                    <p><strong>Email:</strong> ${narudba.email}</p>
-                    <p><strong>Telefon:</strong> ${narudba.telefon}</p>
-                    <p><strong>Adresa:</strong> ${narudba.adresa}</p>
-                    <p><strong>Grad:</strong> ${narudba.grad} ${narudba.postanskiBroj}</p>
-                </div>
-                
-                ${narudba.napomena ? `
-                <div style="background: #fff3cd; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #856404; margin-top: 0;">Napomena:</h3>
-                    <p>${narudba.napomena}</p>
-                </div>
-                ` : ''}
-                
-                <div style="background: #d4edda; padding: 20px; border-radius: 8px; margin: 20px 0;">
-                    <h3 style="color: #155724; margin-top: 0;">Akcije:</h3>
-                    <p>• Kontaktirajte kupca na: ${narudba.telefon}</p>
-                    <p>• Pripremite majicu veličine ${narudba.velicina}</p>
-                    <p>• Organizujte dostavu na adresu</p>
-                </div>
-                
-                <div style="text-align: center; margin-top: 30px;">
-                    <p style="color: #666;">Narudžba primljena: ${new Date(narudba.datum).toLocaleString('sr-RS')}</p>
-                </div>
-            </div>
-        </div>
-        `
-    };
     
     try {
         const info = await transporter.sendMail(mailOptions);
