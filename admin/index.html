@@ -274,9 +274,9 @@
                 const response = await fetch('/api/admin/stats');
                 const stats = await response.json();
                 
-                document.getElementById('totalOrders').textContent = stats.ukupno_narudžbi || 0;
+                document.getElementById('totalOrders').textContent = stats.ukupno_narudzbi || 0;
                 document.getElementById('finishedOrders').textContent = stats.zavrsene_narudzbe || 0;
-                document.getElementById('processedOrders').textContent = stats.obradjene_narudzbe || 0;
+                document.getElementById('processedOrders').textContent = stats.obradene_narudzbe || 0;
                 document.getElementById('newOrders').textContent = stats.nove_narudzbe || 0;
                 document.getElementById('todayOrders').textContent = stats.danas || 0;
                 document.getElementById('totalRevenue').textContent = (stats.ukupna_zarada || 0) + '€';
@@ -307,7 +307,7 @@
                                 <th>Kupac</th>
                                 <th>Kontakt</th>
                                 <th>Proizvod</th>
-                                <th>Cena</th>
+                                <th>Cijena</th>
                                 <th>Status</th>
                                 <th>Email</th>
                                 <th>Datum</th>
@@ -331,7 +331,7 @@
                                         <div class="order-details">Količina: ${order.kolicina}</div>
                                         ${order.napomena ? `<div class="order-details">Napomena: ${order.napomena}</div>` : ''}
                                     </td>
-                                    <td><strong>${order.ukupna_cena}€</strong></td>
+                                    <td><strong>${order.ukupna_cijena}€</strong></td>
                                     <td>
                                         <select class="status-select" onchange="updateStatus(${order.id}, this.value)">
                                             <option value="nova" ${order.status === 'nova' ? 'selected' : ''}>Nova</option>
@@ -349,8 +349,8 @@
                                         </div>
                                     </td>
                                     <td>
-                                        <div>${new Date(order.datum_narudbe).toLocaleDateString('sr-RS')}</div>
-                                        <div class="order-details">${new Date(order.datum_narudbe).toLocaleTimeString('sr-RS')}</div>
+                                        <div>${new Date(order.datum_narudbe).toLocaleDateString('hr-HR')}</div>
+                                        <div class="order-details">${new Date(order.datum_narudbe).toLocaleTimeString('hr-HR')}</div>
                                     </td>
                                 </tr>
                             `).join('')}
