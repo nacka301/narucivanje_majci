@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Ažuriranje cene na osnovu količine
     quantitySelect.addEventListener('change', function() {
         const quantity = parseInt(this.value);
-        const totalPrice = quantity * 25;
+        const totalPrice = quantity * 20;
         orderButton.textContent = `Naruči majicu (${totalPrice}€)`;
     });
 
