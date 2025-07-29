@@ -137,7 +137,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Prikaži hvala modal
                 showThankYouSection(result.narudba);
                 orderForm.reset();
-                orderButton.textContent = 'Naruči majicu (25€)';
+                orderButton.textContent = 'Naruči majicu (20€)';
                 
                 console.log('Narudžba uspešno poslata:', result.narudba);
             } else {
