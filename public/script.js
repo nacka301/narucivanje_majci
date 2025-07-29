@@ -149,7 +149,7 @@ document.addEventListener('DOMContentLoaded', function() {
         } finally {
             orderButton.disabled = false;
             const quantity = parseInt(quantitySelect.value) || 1;
-            const totalPrice = quantity * 25;
+            const totalPrice = quantity * 20;
             orderButton.textContent = `Naruči majicu (${totalPrice}€)`;
         }
     });
